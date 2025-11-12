@@ -1,0 +1,1177 @@
+/* ======================================================
+   CONSTRUCCIONES MADRE AGUA ST - ESTILOS PRINCIPALES
+   ====================================================== */
+
+/* Variables base */
+:root {
+  --blue: #0b66c3;
+  --dark: #0b3a66;
+  --muted: #6b7280;
+  --card: #ffffff;
+  --accent: #f8fafc;
+  --radius: 14px;
+}
+
+/* Reset y base */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  color: #1f2937;
+  background: linear-gradient(180deg, #eef6ff 0%, #f8fbff 100%);
+  line-height: 1.6;
+}
+
+a {
+  color: var(--blue);
+  text-decoration: none;
+}
+
+h1, h2, h3, h4 {
+  color: var(--dark);
+}
+
+/* ======================================================
+   HEADER
+   ====================================================== */
+header {
+  background: var(--blue);
+  color: white;
+  padding: 22px 18px;
+  box-shadow: 0 6px 18px rgba(11, 66, 195, 0.12);
+  position: sticky;
+  top: 0;
+  z-index: 99;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 18px;
+}
+
+nav ul {
+  display: flex;
+  gap: 18px;
+  list-style: none;
+}
+
+nav a {
+  font-weight: 600;
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: background 0.3s ease;
+}
+
+nav a:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* ======================================================
+   HERO
+   ====================================================== */
+#heroVideo {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+.hero {
+  padding: 120px 0 56px;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.hero h1 {
+  font-size: 2.4rem;
+  margin-bottom: 12px;
+}
+
+.hero h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  color: var(--dark);
+}
+
+.hero p {
+  margin: 0 auto 18px;
+  color: var(--muted);
+  max-width: 820px;
+}
+
+.btn {
+  display: inline-block;
+  background: var(--dark);
+  color: white;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(11, 58, 102, 0.12);
+  transition: 0.25s ease;
+}
+
+.btn:hover {
+  background: #083055;
+  transform: translateY(-2px);
+}
+
+.btn-primario:hover {
+  box-shadow: 0 0 10px #00aaff;
+  transform: scale(1.05);
+}
+
+/* ======================================================
+   SECCIONES
+   ====================================================== */
+section {
+  padding: 36px 0;
+}
+
+/* Bloques de servicios con imagen + texto */
+.service-block {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 40px;
+  background-color: var(--card);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  transition: transform 0.3s ease;
+}
+
+.service-block:hover {
+  transform: translateY(-4px);
+}
+
+.service-block img {
+  width: 280px;
+  height: auto;
+  border-radius: 10px;
+  object-fit: cover;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.service-text {
+  flex: 1;
+}
+
+.service-text h3 {
+  font-size: 1.4rem;
+  margin-bottom: 10px;
+  color: var(--dark);
+}
+
+.service-text p {
+  margin-bottom: 10px;
+  color: var(--muted);
+}
+
+.service-text ul {
+  padding-left: 20px;
+  color: #333;
+}
+
+.service-text ul li {
+  margin-bottom: 6px;
+  list-style-type: disc;
+}
+
+/* Confianza PDL */
+.confianza-content {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.confianza-texto {
+  flex: 1;
+}
+
+.confianza-img img {
+  max-width: 100%;
+  border-radius: 12px;
+}
+
+/* ======================================================
+   TESTIMONIOS
+   ====================================================== */
+.testimonios {
+  background: var(--accent);
+  padding: 48px 0;
+  text-align: center;
+}
+
+.testimonial-card {
+  background: white;
+  padding: 20px;
+  margin: 12px auto;
+  max-width: 600px;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+}
+
+/* ======================================================
+   MAPA
+   ====================================================== */
+.mapa-placeholder-img img {
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* ======================================================
+   WHATSAPP FLOTANTE
+   ====================================================== */
+.whatsapp-float {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #25D366;
+  color: white;
+  font-size: 28px;
+  padding: 10px;
+  border-radius: 50%;
+  z-index: 100;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.whatsapp-float:hover {
+  transform: scale(1.1);
+}
+
+/* ======================================================
+   FOOTER
+   ====================================================== */
+footer {
+  padding: 22px 0;
+  text-align: center;
+  color: var(--dark);
+  background: #f2f6fb;
+}
+
+/* ======================================================
+   RESPONSIVE
+   ====================================================== */
+@media (max-width: 880px) {
+  .confianza-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  nav ul {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .service-block {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .service-block img {
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .service-text ul {
+    text-align: left;
+  }
+}
+
+/* Cuadros con íconos o numeración */
+.card-icon {
+  background-color: #0B3A66;
+  color: white;
+  padding: 24px;
+  border-radius: 12px;
+  position: relative;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease;
+}
+
+.card-icon:hover {
+  transform: translateY(-4px);
+}
+
+.card-icon h3 {
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+  padding-left: 42px;
+  position: relative;
+}
+
+.card-icon h3::before {
+  content: attr(data-icon);
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 1.2rem;
+  background: #0A5080;
+  color: white;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Alternativa con numeración */
+.card-icon[data-step] h3::before {
+  content: attr(data-step);
+  font-family: inherit;
+  font-weight: bold;
+}
+
+/* Lista interna */
+.card-icon ul {
+  margin-top: 12px;
+  padding-left: 20px;
+  font-size: 0.95rem;
+}
+
+.card-icon ul li {
+  margin-bottom: 6px;
+  list-style-type: disc;
+}
+
+/* Numeración automática con círculos */
+.card-numbered {
+  position: relative;
+  counter-increment: servicio;
+  padding-top: 40px;
+}
+
+.card-numbered::before {
+  content: counter(servicio);
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  width: 32px;
+  height: 32px;
+  background: white;
+  color: #0B3A66;
+  font-weight: bold;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 32px;
+  font-size: 1rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  animation: fadeInCircle 0.6s ease-out;
+}
+
+@keyframes fadeInCircle {
+  from {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Asegura que los h3 dentro de tarjetas sean blancos */
+.card h3 {
+  color: white;
+}
+/* ===== SERVICIOS DE CONSTRUCCIÓN ESPECIALIZADOS ===== */
+#servicios-especializados {
+  counter-reset: servicio; /* Reinicia contador */
+}
+
+#servicios-especializados .card {
+  position: relative;
+  counter-increment: servicio;
+  background-color: #0B3A66;
+  color: white;
+  padding: 24px;
+  border-radius: 14px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease;
+}
+
+#servicios-especializados .card:hover {
+  transform: translateY(-4px);
+}
+
+/* Título con círculo numerado */
+#servicios-especializados .card h3 {
+  color: #f7f6f4; 
+  margin-bottom: 10px;
+  padding-left: 48px;
+  position: relative;
+  font-weight: 700;
+}
+
+#servicios-especializados .card h3::before {
+  content: counter(servicio);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 36px;
+  height: 36px;
+  background: white;
+  color: #0B3A66;
+  border-radius: 50%;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.hero-image {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.hero-image img {
+  max-width: 90%;
+  border-radius: 8px;             /* Bordes más sutiles */
+  box-shadow: inset 0 0 8px rgba(0,0,0,0.15); /* Sombra interna */
+  border: 2px solid #e5e7eb;     /* Borde gris claro que la une al fondo */
+  background-color: #f8fafc;     /* Color similar al fondo */
+  filter: contrast(1.05) brightness(0.98); /* Ajuste leve de color */
+  transition: filter 0.3s ease;
+}
+
+.hero-image img:hover {
+  filter: contrast(1.1) brightness(1); /* Pequeño realce al pasar el mouse */
+}
+.beneficios {
+  background: var(--accent);
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.beneficios-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+.beneficios-list li {
+  font-size: 1.1rem;
+  margin-bottom: 12px;
+  color: var(--dark);
+}
+
+.beneficios-list i {
+  color: var(--blue);
+  margin-right: 8px;
+}
+@media (max-width: 480px) {
+  h1, h2 {
+    font-size: 1.5rem;
+  }
+
+  .btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .card-icon h3 {
+    font-size: 1.1rem;
+  }
+}
+.card h3 {
+  color: #000 !important;
+}
+.contact-form .form-control {
+  margin-bottom: 1.5rem;
+}
+.contact-form .input-with-icon {
+  position: relative;
+}
+.contact-form .input-with-icon i {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #6b7280;
+}
+.contact-form .input-with-icon input,
+.contact-form .input-with-icon select,
+.contact-form .input-with-icon textarea {
+  width: 100%;
+  padding: 12px 12px 12px 40px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+.contact-form .input-with-icon textarea {
+  padding-left: 40px;
+  min-height: 120px;
+}
+.contact-form button.btn {
+  background-color: #0B3A66;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+}
+.contact-form button.btn:hover {
+  background-color: #082A4D;
+}
+.logo-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 0;
+    background-color: #f8fafc00;
+    animation: slideDown 1.2s ease-out forwards;
+    opacity: 0;
+    transform: translateY(-40px);
+  }
+
+  @keyframes slideDown {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+      /* Estilos del Carrusel */
+    .galeria {
+        position: relative;
+        width: 100%;
+        max-width: 800px;
+        margin: 30px auto;
+        overflow: hidden;
+        border-radius: 12px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    }
+
+    .carrusel {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+        width: 100%;
+    }
+
+    .slide {
+        min-width: 100%;
+        transition: opacity 0.5s ease;
+    }
+
+    .slide img {
+        width: 100%;
+        height: 450px;
+        object-fit: cover;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+    }
+
+    .slide img:hover {
+        transform: scale(1.02);
+    }
+
+    .indicadores {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 15px;
+    }
+
+    .indicador {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: #ccc;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .indicador.activo {
+        background: #0B3A66;
+        transform: scale(1.2);
+    }
+
+    .controles-carrusel {
+        position: absolute;
+        top: 50%;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        transform: translateY(-50%);
+        padding: 0 20px;
+        box-sizing: border-box;
+    }
+
+    .btn-anterior, .btn-siguiente {
+        background: rgba(11, 58, 102, 0.8);
+        color: white;
+        border: none;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(5px);
+    }
+
+    .btn-anterior:hover, .btn-siguiente:hover {
+        background: rgba(11, 58, 102, 1);
+        transform: scale(1.1);
+    }
+
+    /* Estilos del Modal */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.9);
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .modal.mostrar {
+        opacity: 1;
+    }
+
+    .contenido-modal {
+        position: relative;
+        max-width: 90%;
+        max-height: 90%;
+        text-align: center;
+    }
+
+    .contenido-modal img {
+        max-width: 100%;
+        max-height: 90vh;
+        border-radius: 8px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    .cerrar {
+        position: absolute;
+        top: -50px;
+        right: 0;
+        color: white;
+        font-size: 35px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: color 0.3s ease;
+        background: rgba(0,0,0,0.5);
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .cerrar:hover {
+        color: #ff6b6b;
+        background: rgba(0,0,0,0.7);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .slide img {
+            height: 300px;
+        }
+        
+        .btn-anterior, .btn-siguiente {
+            width: 40px;
+            height: 40px;
+            font-size: 16px;
+        }
+        
+        .galeria {
+            margin: 20px auto;
+        }
+    }
+
+    /* Estilo para el botón de WhatsApp */
+    .whatsapp-float {
+        position: fixed;
+        bottom: 25px;
+        right: 25px;
+        background: #25D366;
+        color: white;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 30px;
+        box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+        cursor: pointer;
+        z-index: 100;
+        transition: all 0.3s ease;
+        text-decoration: none;
+    }
+
+    .whatsapp-float:hover {
+        transform: scale(1.1);
+        box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
+    }
+  /* ======================================================
+   MENÚ CIRCULAR DE USUARIO - ESTILOS FUNCIONALES
+   ====================================================== */
+
+.circular-menu-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.circular-menu {
+    position: relative;
+    display: inline-block;
+}
+
+/* Botón central del menú */
+.circular-menu-button {
+    background: #0B3A66;
+    border: 2px solid #e0e0e0;
+    border-radius: 50%;
+    cursor: pointer;
+    display: inline-block;
+    height: 60px;
+    position: relative;
+    transition: all 0.3s ease;
+    width: 60px;
+    z-index: 1001;
+    box-shadow: 0 4px 15px rgba(11, 58, 102, 0.3);
+}
+
+/* Líneas del botón hamburguesa */
+.line-one,
+.line-two,
+.line-three {
+    background: white;
+    border-radius: 3px;
+    height: 3px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: all 0.4s ease;
+    width: 25px;
+}
+
+.line-one {
+    top: 40%;
+}
+
+.line-two {
+    top: 50%;
+}
+
+.line-three {
+    top: 60%;
+}
+
+/* Ocultar checkbox */
+#circular-toggle {
+    display: none;
+}
+
+/* Burbujas del menú circular */
+.circular-bubble {
+    align-items: center;
+    background: #0B3A66;
+    border-radius: 50%;
+    color: white;
+    display: flex;
+    font-size: 18px;
+    height: 50px;
+    justify-content: center;
+    left: 50%;
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: all 0.3s ease;
+    width: 50px;
+    box-shadow: 0 4px 12px rgba(11, 58, 102, 0.3);
+    border: 2px solid white;
+    z-index: 999;
+}
+
+.bubble-two {
+    transition-delay: 0.05s;
+}
+
+.bubble-three {
+    transition-delay: 0.1s;
+}
+
+.bubble-four {
+    transition-delay: 0.15s;
+}
+
+/* Contenido de las burbujas */
+.bubble-content {
+    align-items: center;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    transition: all 0.3s ease;
+    width: 100%;
+    text-decoration: none;
+    color: white;
+    font-size: 1.1rem;
+}
+
+/* Efectos hover */
+.circular-menu-button:hover {
+    background: #F57B30;
+    transform: scale(1.05);
+}
+
+.bubble-content:hover {
+    background: #F57B30;
+    transform: scale(1.1);
+}
+
+/* Estados cuando el menú está activo */
+#circular-toggle:checked ~ .circular-menu-button {
+    background: #F57B30;
+}
+
+#circular-toggle:checked ~ .circular-menu-button .line-one {
+    top: 50%;
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+#circular-toggle:checked ~ .circular-menu-button .line-two {
+    opacity: 0;
+}
+
+#circular-toggle:checked ~ .circular-menu-button .line-three {
+    top: 50%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+/* Animación de las burbujas cuando el menú está abierto */
+#circular-toggle:checked ~ .circular-bubble {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* Posiciones para usuario logueado (4 opciones) */
+#circular-toggle:checked ~ .bubble-one {
+    top: -90px;
+    left: 50%;
+}
+
+#circular-toggle:checked ~ .bubble-two {
+    top: -45px;
+    left: 90px;
+}
+
+#circular-toggle:checked ~ .bubble-three {
+    top: 45px;
+    left: 90px;
+}
+
+#circular-toggle:checked ~ .bubble-four {
+    top: 90px;
+    left: 50%;
+}
+
+/* Posiciones para usuario NO logueado (2 opciones) */
+.circular-menu.user-not-logged #circular-toggle:checked ~ .bubble-one {
+    top: -80px;
+    left: 50%;
+}
+
+.circular-menu.user-not-logged #circular-toggle:checked ~ .bubble-two {
+    top: 0px;
+    left: 80px;
+}
+
+/* Efectos de tooltip */
+/* Efectos de tooltip */
+.circular-bubble {
+    position: relative;
+}
+
+.circular-bubble::before {
+    content: attr(title);
+    position: absolute;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 10px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+    z-index: 1000;
+}
+
+/* Mostrar tooltip cuando el menú está abierto */
+#circular-toggle:checked ~ .circular-bubble::before {
+    opacity: 1;
+}
+/* Responsive */
+@media (max-width: 768px) {
+    .circular-menu-container {
+        top: 15px;
+        right: 15px;
+    }
+    
+    .circular-menu-button {
+        height: 50px;
+        width: 50px;
+    }
+    
+    .circular-bubble {
+        height: 45px;
+        width: 45px;
+        font-size: 16px;
+    }
+    
+    .line-one,
+    .line-two,
+    .line-three {
+        width: 20px;
+    }
+
+    /* Ajustes para móvil - usuario logueado */
+    #circular-toggle:checked ~ .bubble-one {
+        top: -80px;
+    }
+
+    #circular-toggle:checked ~ .bubble-two {
+        top: -40px;
+        left: 75px;
+    }
+
+    #circular-toggle:checked ~ .bubble-three {
+        top: 40px;
+        left: 75px;
+    }
+
+    #circular-toggle:checked ~ .bubble-four {
+        top: 80px;
+    }
+
+    /* Ajustes para móvil - usuario no logueado */
+    .circular-menu.user-not-logged #circular-toggle:checked ~ .bubble-one {
+        top: -70px;
+    }
+
+    .circular-menu.user-not-logged #circular-toggle:checked ~ .bubble-two {
+        top: 0px;
+        left: 70px;
+    }
+}
+/* ======================================================
+   CORRECCIÓN PARA EL MENÚ CIRCULAR - EVITAR PROPAGACIÓN
+   ====================================================== */
+
+/* Asegurar que el checkbox no interfiera con los clics */
+#circular-toggle {
+    pointer-events: none;
+}
+
+/* Mejorar la respuesta visual del botón */
+.circular-menu-button:active {
+    transform: scale(0.95);
+}
+
+/* Asegurar que las burbujas sean clickeables */
+.circular-bubble,
+.bubble-content {
+    pointer-events: auto;
+}
+
+/* Feedback visual cuando el menú está abierto */
+#circular-toggle:checked ~ .circular-menu-button {
+    animation: pulse 0.3s ease;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+/* ======================================================
+   MENÚ CIRCULAR - POSICIONES CORREGIDAS (HACIA LA IZQUIERDA)
+   ====================================================== */
+
+/* Posiciones para usuario logueado (4 opciones) - HACIA LA IZQUIERDA */
+#circular-toggle:checked ~ .bubble-one {
+    top: -90px;
+    left: -90px;  /* Cambiado de 50% a -90px (izquierda) */
+}
+
+#circular-toggle:checked ~ .bubble-two {
+    top: -45px;
+    left: -120px; /* Cambiado de 90px a -120px (más a la izquierda) */
+}
+
+#circular-toggle:checked ~ .bubble-three {
+    top: 45px;
+    left: -120px; /* Cambiado de 90px a -120px (más a la izquierda) */
+}
+
+#circular-toggle:checked ~ .bubble-four {
+    top: 90px;
+    left: -90px;  /* Cambiado de 50% a -90px (izquierda) */
+}
+
+/* Posiciones para usuario NO logueado (2 opciones) - HACIA LA IZQUIERDA */
+.circular-menu.user-not-logged #circular-toggle:checked ~ .bubble-one {
+    top: -80px;
+    left: -80px;  /* Cambiado de 50% a -80px (izquierda) */
+}
+
+.circular-menu.user-not-logged #circular-toggle:checked ~ .bubble-two {
+    top: 0px;
+    left: -100px; /* Cambiado de 80px a -100px (izquierda) */
+}
+
+/* Responsive - Ajustes para móvil HACIA LA IZQUIERDA */
+@media (max-width: 768px) {
+    /* Ajustes para móvil - usuario logueado */
+    #circular-toggle:checked ~ .bubble-one {
+        top: -80px;
+        left: -70px;  /* Izquierda en móvil */
+    }
+
+    #circular-toggle:checked ~ .bubble-two {
+        top: -40px;
+        left: -90px;  /* Más a la izquierda en móvil */
+    }
+
+    #circular-toggle:checked ~ .bubble-three {
+        top: 40px;
+        left: -90px;  /* Más a la izquierda en móvil */
+    }
+
+    #circular-toggle:checked ~ .bubble-four {
+        top: 80px;
+        left: -70px;  /* Izquierda en móvil */
+    }
+
+    /* Ajustes para móvil - usuario no logueado */
+    .circular-menu.user-not-logged #circular-toggle:checked ~ .bubble-one {
+        top: -70px;
+        left: -60px;  /* Izquierda en móvil */
+    }
+
+    .circular-menu.user-not-logged #circular-toggle:checked ~ .bubble-two {
+        top: 0px;
+        left: -80px;  /* Más a la izquierda en móvil */
+    }
+}
+/* ======================================================
+   MENÚ CIRCULAR - POSICIONES COMPACTAS (SEMICÍRCULO IZQUIERDO)
+   ====================================================== */
+
+/* Posiciones para usuario logueado (4 opciones) - SEMICÍRCULO IZQUIERDO */
+#circular-toggle:checked ~ .bubble-one {
+    top: -70px;
+    left: -50px;
+}
+
+#circular-toggle:checked ~ .bubble-two {
+    top: -20px;
+    left: -70px;
+}
+
+#circular-toggle:checked ~ .bubble-three {
+    top: 30px;
+    left: -70px;
+}
+
+#circular-toggle:checked ~ .bubble-four {
+    top: 70px;
+    left: -50px;
+}
+
+/* Posiciones para usuario NO logueado (2 opciones) - LÍNEA VERTICAL IZQUIERDA */
+.circular-menu.user-not-logged #circular-toggle:checked ~ .bubble-one {
+    top: -60px;
+    left: -50px;
+}
+
+.circular-menu.user-not-logged #circular-toggle:checked ~ .bubble-two {
+    top: 0px;
+    left: -70px;
+}
+
+/* Responsive - Ajustes para móvil COMPACTOS */
+@media (max-width: 768px) {
+    /* Ajustes para móvil - usuario logueado */
+    #circular-toggle:checked ~ .bubble-one {
+        top: -60px;
+        left: -40px;
+    }
+
+    #circular-toggle:checked ~ .bubble-two {
+        top: -15px;
+        left: -55px;
+    }
+
+    #circular-toggle:checked ~ .bubble-three {
+        top: 25px;
+        left: -55px;
+    }
+
+    #circular-toggle:checked ~ .bubble-four {
+        top: 60px;
+        left: -40px;
+    }
+
+    /* Ajustes para móvil - usuario no logueado */
+    .circular-menu.user-not-logged #circular-toggle:checked ~ .bubble-one {
+        top: -50px;
+        left: -35px;
+    }
+
+    .circular-menu.user-not-logged #circular-toggle:checked ~ .bubble-two {
+        top: 0px;
+        left: -50px;
+    }
+}
+/* Asegurar que el contenedor del menú tenga espacio suficiente */
+.circular-menu-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    /* Añadir un poco de padding para que las burbujas no se corten */
+    padding: 10px;
+}

@@ -1,0 +1,560 @@
+<?php
+session_start();
+
+$message_sent = false;
+$errors = [];
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['contact_submit'])) {
+    // Sanitización mejorada
+    $nombre = trim(htmlspecialchars($_POST['nombre'] ?? '', ENT_QUOTES, 'UTF-8'));
+    $email  = trim(filter_var($_POST['email'] ?? '', FILTER_SANITIZE_EMAIL));
+    $telefono = trim(htmlspecialchars($_POST['telefono'] ?? '', ENT_QUOTES, 'UTF-8'));
+    $mensaje  = trim(htmlspecialchars($_POST['mensaje'] ?? '', ENT_QUOTES, 'UTF-8'));
+    $servicio = trim(htmlspecialchars($_POST['servicio'] ?? '', ENT_QUOTES, 'UTF-8'));
+
+    // Validaciones mejoradas
+    if (empty($nombre)) $errors[] = "El nombre es obligatorio.";
+    if (empty($email)) {
+        $errors[] = "El email es obligatorio.";
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $errors[] = "Introduce un email válido.";
+    }
+    if (empty($mensaje)) $errors[] = "Escribe un mensaje.";
+    if (strlen($mensaje) < 10) $errors[] = "El mensaje debe tener al menos 10 caracteres.";
+
+    if (empty($errors)) {
+        // Configuración del email
+        $to = "costmadreaguast@gmail.com";
+        $subject = "📧 Contacto - Construcciones Madre Agua ST - " . ($servicio ?: 'Consulta General');
+        
+        // Cuerpo del email más profesional
+        $body = "
+        NUEVO CONTACTO DESDE EL SITIO WEB
+        
+        📋 INFORMACIÓN DEL CONTACTO:
+        • Nombre: $nombre
+        • Email: $email
+        • Teléfono: " . ($telefono ?: 'No proporcionado') . "
+        • Servicio de interés: " . ($servicio ?: 'No especificado') . "
+        
+        💬 MENSAJE:
+        $mensaje
+        
+        ---
+        Enviado el: " . date('d/m/Y H:i:s') . "
+        Desde: Construcciones Madre Agua ST
+        ";
+        
+        $headers = "From: no-reply@madreagua.st\r\n";
+        $headers .= "Reply-To: $email\r\n";
+        $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
+        $headers .= "X-Mailer: PHP/" . phpversion();
+
+        $mail_ok = @mail($to, $subject, $body, $headers);
+
+        // Guardar en CSV con más información
+        $csv_line = [
+            date('Y-m-d H:i:s'),
+            $nombre,
+            $email,
+            $telefono ?: 'N/A',
+            $servicio ?: 'Consulta General',
+            $mensaje,
+            $mail_ok ? 'Enviado' : 'Error'
+        ];
+        
+        $csv_file = __DIR__ . '/contacts.csv';
+        $fp = fopen($csv_file, 'a');
+        if ($fp) {
+            // Si el archivo está vacío, agregar headers
+            if (filesize($csv_file) == 0) {
+                fputcsv($fp, ['Fecha', 'Nombre', 'Email', 'Teléfono', 'Servicio', 'Mensaje', 'Estado']);
+            }
+            fputcsv($fp, $csv_line);
+            fclose($fp);
+        }
+
+        // REDIRECCIÓN PARA EVITAR REENVÍO Y LIMPIAR FORMULARIO
+        header('Location: ' . $_SERVER['PHP_SELF'] . '?success=1#contacto');
+        exit;
+    }
+}
+
+// Verificar si viene de un envío exitoso
+$message_sent = isset($_GET['success']) && $_GET['success'] == '1';
+?>
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Construcciones Madre Agua ST</title>
+  <link rel="icon" type="image/jpg" href="img/logo.png">
+  <meta name="description" content="Construcciones Madre Agua ST - Venta de materiales y ejecución de obras sociales apoyados por el Proyecto de Desarrollo Local (PDL).">
+  <link rel="stylesheet" href="styles/variables.css">
+  <link rel="stylesheet" href="styles/index.css">
+  <link rel="stylesheet" href="styles/css/all.min.css">
+</head>
+<style>
+  
+</style>
+<body>
+ <div style="text-align:left;">
+ <header style="background-color:#0B3A66; padding:20px 0;">
+  <div class="container" style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:20px; max-width:1200px; margin:0 auto;">
+
+    <!-- Logo alineado a la izquierda -->
+    <div style="flex-shrink:0;">
+      <img src="img/logo.png" alt="Logo Construcciones Madre Agua ST" style="height:200px;">
+    </div>
+
+    <!-- Menú alineado a la izquierda -->
+    <nav style="flex-shrink:0; display:flex; justify-content:flex-start; gap:12px; align-items:center;">
+      <a href="#servicios" class="small" style="color:rgba(255,255,255,0.95); text-decoration:none;">Servicios</a>
+      <a href="tienda.php" class="small" style="color:rgba(255,255,255,0.95); text-decoration:none;">Tienda</a>
+      <a href="#contacto" class="small" style="color:rgba(255,255,255,0.95); text-decoration:none;">Contacto</a>
+      
+     
+<!-- Menú Circular de Usuario -->
+<div class="circular-menu-container">
+    <div class="circular-menu <?php echo (!isset($_SESSION['loggedin']) || !$_SESSION['loggedin']) ? 'user-not-logged' : ''; ?>">
+        <input type="checkbox" id="circular-toggle">
+        
+        <label for="circular-toggle" class="circular-menu-button">
+            <span class="line-one"></span>
+            <span class="line-two"></span>
+            <span class="line-three"></span>
+        </label>
+
+        <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin']): ?>
+            <!-- Usuario logueado -->
+            <div class="circular-bubble bubble-one">
+                <a href="perfil.php" class="bubble-content" title="Mi Perfil">
+                    <i class="fas fa-user-cog"></i>
+                </a>
+            </div>
+            
+            <div class="circular-bubble bubble-two">
+                <a href="mis_pedidos.php" class="bubble-content" title="Mis Pedidos">
+                    <i class="fas fa-box"></i>
+                </a>
+            </div>
+            
+            <?php if (isset($_SESSION['usuario_rol']) && $_SESSION['usuario_rol'] == 'admin'): ?>
+            <div class="circular-bubble bubble-three">
+                <a href="admin/panel.php" class="bubble-content" title="Panel Admin">
+                    <i class="fas fa-cog"></i>
+                </a>
+            </div>
+            <?php endif; ?>
+            
+            <div class="circular-bubble bubble-four">
+                <a href="logout.php" class="bubble-content" title="Cerrar Sesión">
+                    <i class="fas fa-sign-out-alt"></i>
+                </a>
+            </div>
+
+        <?php else: ?>
+            <!-- Usuario no logueado -->
+            <div class="circular-bubble bubble-one">
+                <a href="login.php" class="bubble-content" title="Iniciar Sesión">
+                    <i class="fas fa-sign-in-alt"></i>
+                </a>
+            </div>
+            
+            <div class="circular-bubble bubble-two">
+                <a href="registro.php" class="bubble-content" title="Crear Cuenta">
+                    <i class="fas fa-user-plus"></i>
+                </a>
+            </div>
+        <?php endif; ?>
+    </div>
+</div>
+
+
+  </nav>
+    
+    <!-- Slogan centrado -->
+    <div style="flex-grow:1; text-align:center;">
+      <h3 style="margin:0; font-weight:400; font-size:1.4rem; color:white;">
+        Donde la construcción toma vida y su proyecto, es nuestra responsabilidad.
+      </h3>
+    </div>
+   </div>
+</header>
+
+  <main>
+    <section id="inicio" class="hero">
+  <div class="hero-content">
+    <h1>Construimos futuro, levantamos comunidad</h1>
+    <p>
+      <strong> En Construcciones Madre Agua ST, creemos que cada ladrillo cuenta. 
+      Nos dedicamos a crear espacios que mejoren la calidad de vida 
+      de las personas y fortalezcan el tejido social.</strong>
+    </p>
+
+    <section class="galeria">
+  <div class="carrusel">
+    <div class="slide">
+      <img src="img/obra1.jpg" alt="Obra 1 - Construcciones Madre Agua ST" onclick="abrirModal(this)">
+    </div>
+    <div class="slide">
+      <img src="img/obra2.jpg" alt="Obra 2 - Construcciones Madre Agua ST" onclick="abrirModal(this)">
+    </div>
+    <div class="slide">
+      <img src="img/obra3.jpg" alt="Obra 3 - Construcciones Madre Agua ST" onclick="abrirModal(this)">
+    </div>
+    <!-- Agrega más imágenes aquí -->
+  </div>
+  
+  <div class="indicadores"></div>
+
+  <!-- Modal -->
+  <div id="modal" class="modal">
+    <div class="contenido-modal">
+      <span class="cerrar" onclick="cerrarModal()">×</span>
+      <img id="imagenAmpliada" src="" alt="Imagen ampliada">
+    </div>
+  </div>
+</section>
+
+    <a href="#servicios" class="btn">Conoce nuestros servicios</a>
+  </div>
+</section>
+
+    <section id="impacto" class="impacto-section" style="padding:60px 20px;">
+  <div class="container" style="max-width:1100px; margin:0 auto;">
+    
+    <!-- Imagen alineada al ancho del texto -->
+    <div style="margin-bottom:30px;">
+      <img src="img/impacto.png" alt="Impacto social en construcción" style="width:100%; max-width:100%; border-radius:12px; box-shadow:0 6px 18px rgba(0,0,0,0.08);">
+    </div>
+
+   <div>
+
+    <!-- Texto descriptivo -->
+    <div style="text-align:justify; font-size:1.1rem; line-height:1.8;">
+            <p>En <strong>Construcciones Madre Agua ST</strong>, entendemos que cada proyecto de construcción es una oportunidad para transformar comunidades enteras. Con experiencia en obras sociales, nos especializamos en crear espacios que verdaderamente importan: centros comunitarios, viviendas sociales, escuelas y espacios públicos que mejoran la calidad de vida de miles de personas.</p>
+      <p>Nuestro enfoque va más allá de levantar estructuras. Trabajamos de la mano con administraciones públicas y promotores sociales para garantizar que cada centavo invertido se traduzca en beneficio real para la comunidad. Desde la planificación inicial hasta la entrega final, aplicamos metodologías sostenibles, respetamos los plazos establecidos y mantenemos los más altos estándares de calidad en cada fase del proyecto.</p>
+      <p>Lo que nos diferencia es nuestra comprensión profunda de las necesidades específicas de las obras sociales: presupuestos ajustados pero resultados excepcionales, materiales duraderos y de bajo mantenimiento, diseños accesibles e inclusivos, y un compromiso firme con la sostenibilidad ambiental.</p>
+    </div>
+
+  </div>
+</section>
+
+      <section id="servicios-especializados" class="container" style="padding:60px 20px;">
+  <h2 style="text-align:center; font-size:2rem; margin-bottom:40px;">Servicios de Construcción Especializados</h2>
+  <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:30px;">
+
+    <!-- Viviendas Sociales -->
+    <div class="card" style="background-color:#E6F4F1; color:#0B3A66; padding:24px; border-radius:14px;">
+      <h3>Viviendas Sociales</h3>
+      <p><strong>Hogares dignos que perduran.</strong> Construimos viviendas seguras, eficientes y accesibles que transforman vidas. Aplicamos criterios de sostenibilidad, materiales duraderos y diseños pensados para el bienestar familiar.</p>
+    </div>
+
+    <!-- Centros Educativos -->
+    <div class="card" style="background-color:#FFF7E6; color:#0B3A66; padding:24px; border-radius:14px;">
+      <h3>Centros Educativos</h3>
+      <p><strong>Espacios que inspiran el aprendizaje.</strong> Diseñamos escuelas y centros de formación que estimulan el desarrollo infantil y juvenil, priorizando seguridad, accesibilidad y funcionalidad.</p>
+    </div>
+
+    <!-- Instalaciones Deportivas -->
+    <div class="card" style="background-color:#F0E7FF; color:#0B3A66; padding:24px; border-radius:14px;">
+      <h3>Instalaciones Deportivas</h3>
+      <p><strong>Infraestructura que activa a la comunidad.</strong> Creamos polideportivos y pistas que promueven la salud y la integración social, con materiales de alta calidad y eficiencia energética.</p>
+    </div>
+
+    <!-- Venta de Materiales -->
+    <div class="card" style="background-color:#FDF2F8; color:#0B3A66; padding:24px; border-radius:14px;">
+      <h3>Venta de Materiales</h3>
+      <p><strong>Todo lo que tu obra necesita, en un solo lugar.</strong> Suministramos cemento, arena, bloques, hierro y más, con calidad garantizada y atención personalizada.</p>
+    </div>
+
+    <!-- Obras Sociales -->
+    <div class="card" style="background-color:#E8F0FE; color:#0B3A66; padding:24px; border-radius:14px;">
+      <h3>Ejecución de Obras Sociales</h3>
+      <p><strong>Construimos con propósito.</strong> Rehabilitamos infraestructuras comunitarias, viviendas sociales, caminos y espacios públicos que generan impacto real y duradero.</p>
+    </div>
+
+    <!-- Construcción y Remodelación -->
+    <div class="card" style="background-color:#F3FCE8; color:#0B3A66; padding:24px; border-radius:14px;">
+      <h3>Construcción y Remodelación</h3>
+      <p><strong>Obras llave en mano, sin complicaciones.</strong> Ejecutamos proyectos completos con control de calidad, cumplimiento de plazos y atención a cada detalle.</p>
+    </div>
+
+  </div>
+</section>
+
+<section id="nuestro-proceso" class="container" style="padding:60px 20px;">
+  <h2 style="text-align:center; font-size:2rem; margin-bottom:40px;">Nuestro Proceso de Trabajo: Transparencia Total</h2>
+  <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:30px;">
+
+    <!-- Paso 1: Diagnóstico -->
+    <div class="card-icon" style="background-color:#E6F4EA; color:#0B3A66; text-align:justify;">
+      <h3 data-icon="🔍">Diagnóstico Inicial</h3>
+      <p>Escuchamos tus necesidades, analizamos el entorno y definimos los objetivos del proyecto con claridad. Este primer paso garantiza que cada obra comience con una visión compartida y realista.</p>
+    </div>
+
+    <!-- Paso 2: Planificación -->
+    <div class="card-icon" style="background-color:#CDEFD6; color:#0B3A66; text-align:justify;">
+      <h3 data-icon="📐">Planificación Estratégica</h3>
+      <p>Diseñamos soluciones adaptadas al presupuesto, al cronograma y a las condiciones técnicas. Cada detalle se documenta para asegurar transparencia y eficiencia desde el inicio.</p>
+    </div>
+
+    <!-- Paso 3: Ejecución -->
+    <div class="card-icon" style="background-color:#B4E9C2; color:#0B3A66; text-align:justify;">
+      <h3 data-icon="🏗️">Ejecución Profesional</h3>
+      <p>Nuestro equipo técnico ejecuta la obra con precisión, seguridad y respeto por el entorno. Supervisamos cada fase para cumplir con los estándares de calidad y sostenibilidad.</p>
+    </div>
+
+    <!-- Paso 4: Entrega -->
+    <div class="card-icon" style="background-color:#9BE3AE; color:#0B3A66; text-align:justify;">
+      <h3 data-icon="✅">Entrega y Seguimiento</h3>
+      <p>Finalizamos el proyecto con una entrega formal, documentación completa y seguimiento post-obra. Nos aseguramos de que el resultado cumpla con tus expectativas y las de la comunidad.</p>
+    </div>
+
+    <!-- Imagen como tarjeta doble -->
+    <div style="grid-column:span 2; background-color:#FDF2F8; padding:24px; border-radius:14px; text-align:center;">
+      <img src="img/satisfaccion.png" alt="Cliente Satisfecho" style="width:60%; max-width:80%; border-radius:14px;">
+      <p style="text-align:center; font-size:1.2rem; margin-top:20px;"><strong>Tu comunidad, transformada con propósito.</strong></p>
+    </div>
+
+  </div>
+</section>
+
+    <section id="servicios" class="services container" style="padding:60px 20px; background-color:#F8FAFC;">
+  <h2 style="text-align:center; color:var(--dark); font-size:2.4rem; margin-bottom:40px;">Nuestros Servicios</h2>
+
+  <div class="grid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:30px;">
+
+    <!-- Venta de Materiales -->
+    <div class="card" style="background-color:#FDF2F8; padding:24px; border-radius:14px; text-align:center;">
+      <div style="font-size:2.5rem; color:#0B3A66; margin-bottom:12px;">
+        <i class="fas fa-truck-loading"></i>
+      </div>
+      <h4 style="color:#0B3A66;">Venta de Materiales</h4>
+      <p class="muted" style="text-align:justify;">Suministramos cemento, arena, bloques, hierro y todo lo necesario para obras residenciales y comunitarias.</p>
+    </div>
+
+    <!-- Ejecución de Obras Sociales -->
+    <div class="card" style="background-color:#E8F0FE; padding:24px; border-radius:14px; text-align:center;">
+      <div style="font-size:2.5rem; color:#0B3A66; margin-bottom:12px;">
+        <i class="fas fa-hands-helping"></i>
+      </div>
+      <h4 style="color:#0B3A66;">Ejecución de Obras Sociales</h4>
+      <p class="muted" style="text-align:justify;">Rehabilitación de infraestructuras comunitarias, viviendas sociales, caminos y obras públicas con impacto social.</p>
+    </div>
+
+    <!-- Construcción y Remodelación -->
+    <div class="card" style="background-color:#F3FCE8; padding:24px; border-radius:14px; text-align:center;">
+      <div style="font-size:2.5rem; color:#0B3A66; margin-bottom:12px;">
+        <i class="fas fa-tools"></i>
+      </div>
+      <h4 style="color:#0B3A66;">Construcción y Remodelación</h4>
+      <p class="muted" style="text-align:justify;">Obras llave en mano: desde planificación y ejecución hasta entrega final con control de calidad.</p>
+    </div>
+
+  </div>
+</section>
+
+      <section id="cita-impacto" style="padding:60px 40px; background-color:#F0F4F8;">
+  <div style="max-width:800px; margin:0 auto; background-color:#ffffff; border-left:6px solid #0B3A66; border-radius:12px; padding:32px 28px; box-shadow:0 4px 12px rgba(0,0,0,0.06);">
+    <p style="font-size:1.2rem; line-height:1.8; color:#333; font-style:italic; margin:0; text-align:justify;">
+      "Juntos fortalecemos capacidades y realizamos obras que mejoran la calidad de vida. Porque no se trata solo de construir estructuras, sino de edificar oportunidades. Cada proyecto que emprendemos nace del diálogo con la comunidad, se nutre del conocimiento técnico y se concreta con compromiso social.
+      <br><br>
+      Al fortalecer capacidades locales, generamos empleo, impulsamos el aprendizaje y promovemos la participación activa. Las obras que entregamos —ya sean viviendas, escuelas o espacios públicos— no solo transforman el entorno físico, sino que elevan la dignidad, la seguridad y el bienestar de quienes lo habitan.
+      <br><br>
+      <strong>Construir con propósito es construir futuro.</strong>"
+    </p>
+  </div>
+</section>
+
+<div class="whatsapp-float" title="Escríbenos por WhatsApp">
+  <i class="fab fa-whatsapp"></i>
+</div>
+
+<section id="contacto" class="container" style="padding-top:28px;padding-bottom:40px">
+    <h2 style="text-align:center;margin-bottom:12px; font-size:2.5rem; color: #0B3A66;">Contáctanos</h2>
+    <p style="text-align:center; margin-bottom: 40px; font-size:1.1rem; color: #666;">Estamos aquí para ayudarte con tu proyecto</p>
+
+    <?php if (!empty($errors)): ?>
+        <div id="error-message" style="max-width:760px;margin:0 auto 20px;padding:16px;border-radius:12px;background:#FEF2F2;color:#DC2626;border:1px solid #FECACA;">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+                <i class="fas fa-exclamation-triangle"></i>
+                <strong style="font-size:1.1rem;">Por favor corrige los siguientes errores:</strong>
+            </div>
+            <ul style="margin:8px 0 0 24px">
+                <?php foreach ($errors as $e) echo "<li>" . htmlspecialchars($e) . "</li>"; ?>
+            </ul>
+        </div>
+    <?php endif; ?>
+
+    <?php if ($message_sent): ?>
+        <div id="success-message" style="max-width:760px;margin:0 auto 20px;padding:20px;border-radius:12px;background:#F0FDF4;color:#065F46;border:1px solid #BBF7D0; position: relative;">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+                <i class="fas fa-check-circle" style="color:#10B981;"></i>
+                <strong style="font-size:1.1rem;">¡Mensaje enviado con éxito!</strong>
+            </div>
+            <p style="margin:0;">Gracias por contactarnos. Te responderemos en breve.</p>
+            <div id="countdown-timer" style="position:absolute; top:10px; right:15px; font-size:0.9rem; color:#10B981; font-weight:bold;">
+                5s
+            </div>
+        </div>
+    <?php endif; ?>
+
+    <div class="contact-grid" style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start;">
+        
+        <!-- Formulario Mejorado -->
+        <div style="background:#fff;padding:32px;border-radius:16px;box-shadow:0 8px 32px rgba(0,0,0,0.1);">
+            <form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>#contacto" novalidate id="contactForm">
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px;">
+                    <div class="form-control">
+                        <label class="small" style="display:block;margin-bottom:8px;font-weight:600;color:#374151;">
+                            <i class="fas fa-user" style="margin-right:8px;color:#0B3A66;"></i>Nombre *
+                        </label>
+                        <input type="text" name="nombre" value="<?php echo isset($_POST['nombre']) ? htmlspecialchars($_POST['nombre']) : ''; ?>" 
+                               required style="width:100%;padding:12px;border:2px solid #E5E7EB;border-radius:8px;transition:all 0.3s;font-size:1rem;">
+                    </div>
+                    
+                    <div class="form-control">
+                        <label class="small" style="display:block;margin-bottom:8px;font-weight:600;color:#374151;">
+                            <i class="fas fa-envelope" style="margin-right:8px;color:#0B3A66;"></i>Email *
+                        </label>
+                        <input type="email" name="email" value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email']) : ''; ?>" 
+                               required style="width:100%;padding:12px;border:2px solid #E5E7EB;border-radius:8px;transition:all 0.3s;font-size:1rem;">
+                    </div>
+                </div>
+
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px;">
+                    <div class="form-control">
+                        <label class="small" style="display:block;margin-bottom:8px;font-weight:600;color:#374151;">
+                            <i class="fas fa-phone" style="margin-right:8px;color:#0B3A66;"></i>Teléfono
+                        </label>
+                        <input type="text" name="telefono" value="<?php echo isset($_POST['telefono']) ? htmlspecialchars($_POST['telefono']) : ''; ?>" 
+                               style="width:100%;padding:12px;border:2px solid #E5E7EB;border-radius:8px;transition:all 0.3s;font-size:1rem;">
+                    </div>
+                    
+                    <div class="form-control">
+                        <label class="small" style="display:block;margin-bottom:8px;font-weight:600;color:#374151;">
+                            <i class="fas fa-cog" style="margin-right:8px;color:#0B3A66;"></i>Servicio de interés
+                        </label>
+                        <select name="servicio" style="width:100%;padding:12px;border:2px solid #E5E7EB;border-radius:8px;transition:all 0.3s;font-size:1rem;background:white;">
+                            <option value="">— Seleccionar —</option>
+                            <option value="Venta de materiales" <?php if (isset($_POST['servicio']) && $_POST['servicio'] == 'Venta de materiales') echo ' selected'; ?>>Venta de materiales</option>
+                            <option value="Obras sociales" <?php if (isset($_POST['servicio']) && $_POST['servicio'] == 'Obras sociales') echo ' selected'; ?>>Obras sociales</option>
+                            <option value="Construcción / Remodelación" <?php if (isset($_POST['servicio']) && $_POST['servicio'] == 'Construcción / Remodelación') echo ' selected'; ?>>Construcción / Remodelación</option>
+                            <option value="Consulta general" <?php if (isset($_POST['servicio']) && $_POST['servicio'] == 'Consulta general') echo ' selected'; ?>>Consulta general</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-control" style="margin-bottom:24px;">
+                    <label class="small" style="display:block;margin-bottom:8px;font-weight:600;color:#374151;">
+                        <i class="fas fa-comment" style="margin-right:8px;color:#0B3A66;"></i>Mensaje *
+                    </label>
+                    <textarea name="mensaje" required rows="6" 
+                              style="width:100%;padding:12px;border:2px solid #E5E7EB;border-radius:8px;transition:all 0.3s;font-size:1rem;resize:vertical;min-height:120px;"><?php echo isset($_POST['mensaje']) ? htmlspecialchars($_POST['mensaje']) : ''; ?></textarea>
+                </div>
+
+                <div>
+                    <button class="btn" type="submit" name="contact_submit" 
+                            style="background:linear-gradient(135deg, #0B3A66, #1E6BC4);color:white;padding:14px 32px;border:none;border-radius:8px;font-size:1.1rem;font-weight:600;cursor:pointer;transition:all 0.3s;width:100%;">
+                        <i class="fas fa-paper-plane" style="margin-right:8px;"></i>Enviar mensaje
+                    </button>
+                    <div class="small" style="margin-top:12px;color:#6B7280;text-align:center;">
+                        <i class="fas fa-clock" style="margin-right:4px;"></i>Te responderemos en el menor tiempo posible.
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- Información de Contacto -->
+        <aside style="background:linear-gradient(135deg, #0B3A66, #1E6BC4);color:white;padding:32px;border-radius:16px;box-shadow:0 8px 32px rgba(11,58,102,0.2);">
+            <h3 style="margin-top:0;margin-bottom:24px;color:white;font-size:1.5rem;">Información de Contacto</h3>
+            
+            <div style="display:flex;flex-direction:column;gap:20px;">
+                <div style="display:flex;align-items:flex-start;gap:12px;">
+                    <div style="background:rgba(255,255,255,0.1);padding:10px;border-radius:8px;">
+                        <i class="fas fa-phone-alt" style="font-size:1.2rem;"></i>
+                    </div>
+                    <div>
+                        <strong style="display:block;margin-bottom:4px;">Teléfono</strong>
+                        <p style="margin:0;font-size:1.1rem;">+5351435405</p>
+                    </div>
+                </div>
+                
+                <div style="display:flex;align-items:flex-start;gap:12px;">
+                    <div style="background:rgba(255,255,255,0.1);padding:10px;border-radius:8px;">
+                        <i class="fas fa-envelope" style="font-size:1.2rem;"></i>
+                    </div>
+                    <div>
+                        <strong style="display:block;margin-bottom:4px;">Email</strong>
+                        <p style="margin:0;font-size:1.1rem;">costmadreaguast@gmail.com</p>
+                    </div>
+                </div>
+                
+                <div style="display:flex;align-items:flex-start;gap:12px;">
+                    <div style="background:rgba(255,255,255,0.1);padding:10px;border-radius:8px;">
+                        <i class="fas fa-map-marker-alt" style="font-size:1.2rem;"></i>
+                    </div>
+                    <div>
+                        <strong style="display:block;margin-bottom:4px;">Zona de Trabajo</strong>
+                        <p style="margin:0;font-size:1.1rem;">Toda la Isla</p>
+                    </div>
+                </div>
+                
+                <div style="display:flex;align-items:flex-start;gap:12px;">
+                    <div style="background:rgba(255,255,255,0.1);padding:10px;border-radius:8px;">
+                        <i class="fas fa-clock" style="font-size:1.2rem;"></i>
+                    </div>
+                    <div>
+                        <strong style="display:block;margin-bottom:4px;">Horario de Atención</strong>
+                        <p style="margin:0;font-size:1.1rem;">Lunes a Viernes: 8:00 AM - 5:00 PM</p>
+                    </div>
+                </div>
+            </div>
+            
+            <hr style="border:none;border-top:1px solid rgba(255,255,255,0.2);margin:24px 0;">
+            
+            <div style="background:rgba(255,255,255,0.1);padding:16px;border-radius:8px;">
+                <p style="margin:0;font-size:0.95rem;text-align:center;">
+                    <i class="fas fa-info-circle" style="margin-right:6px;"></i>
+                    <strong>¿Proyecto comunitario?</strong> Si cuenta con apoyo del PDL, menciónalo en tu mensaje.
+                </p>
+            </div>
+        </aside>
+    </div>
+</section>
+
+<section class="beneficios" style="padding:60px 20px; background-color:#F8FAFC;">
+  <div class="container" style="max-width:1100px; margin:0 auto;">
+    <h2 style="text-align:center; margin-bottom:40px; color:#0B3A66;">¿Por qué elegirnos?</h2>
+    <ul class="beneficios-list" style="list-style:none; padding:0; display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:20px;">
+      <li style="display:flex; align-items:center; gap:12px; padding:16px; background:white; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.1);">
+        <i class="fas fa-check-circle" style="color:#10B981; font-size:1.5rem;"></i>
+        <span>Vasta experiencia en obras sociales</span>
+      </li>
+      <li style="display:flex; align-items:center; gap:12px; padding:16px; background:white; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.1);">
+        <i class="fas fa-check-circle" style="color:#10B981; font-size:1.5rem;"></i>
+        <span>Transparencia total en cada fase del proyecto</span>
+      </li>
+      <li style="display:flex; align-items:center; gap:12px; padding:16px; background:white; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.1);">
+        <i class="fas fa-check-circle" style="color:#10B981; font-size:1.5rem;"></i>
+        <span>Compromiso con la sostenibilidad y accesibilidad</span>
+      </li>
+    </ul>
+  </div>
+</section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <div style="font-weight:700">Construcciones Madre Agua ST</div>
+      <div class="small">Apoyados por el Proyecto de Desarrollo Local (PDL) — Comprometidos con el desarrollo local</div>
+      <div style="margin-top:8px; font-size:0.9rem;">&copy; <?php echo date('Y'); ?> Construcciones Madre Agua ST. Todos los derechos reservados.</div>
+    </div>
+  </footer>
+  
+<script src="scripts/index.js" defer></script>
+</body>
+</html>

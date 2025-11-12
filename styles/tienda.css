@@ -1,0 +1,1103 @@
+/* ======================================================
+   RESET Y BASE
+   ====================================================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+/* ======================================================
+   NAVBAR
+   ====================================================== */
+.navbar {
+  background-color: #005f73;
+  color: white;
+  padding: 15px 20px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.navbar-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.navbar-left,
+.navbar-center,
+.navbar-right {
+  display: flex;
+  align-items: center;
+}
+
+/* Logo */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+.logo img {
+  height: 80px;
+  margin-right: 10px;
+}
+.logo h1 {
+  font-size: 20px;
+  margin: 0;
+}
+
+/* Menú */
+.menu ul,
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+}
+.menu a,
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+.menu a:hover,
+nav a:hover {
+  text-decoration: underline;
+}
+
+/* ======================================================
+   HERO
+   ====================================================== */
+.hero {
+  background: url('../img/hero-bg.jpg') center/cover no-repeat;
+  color: white;
+  text-align: center;
+  padding: 80px 20px;
+}
+.hero-content {
+  background-color: rgba(0, 95, 115, 0.7);
+  padding: 30px;
+  border-radius: 10px;
+  display: inline-block;
+}
+.boton {
+  background-color: #94d2bd;
+  color: #005f73;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  margin-top: 20px;
+  display: inline-block;
+}
+.boton:hover {
+  background-color: #e0f7f4;
+}
+
+/* ======================================================
+   CATEGORÍAS
+   ====================================================== */
+.categorias {
+  padding: 40px 20px;
+  text-align: center;
+}
+.grid-categorias {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+.categoria {
+  background-color: #e0e0e0;
+  padding: 15px 25px;
+  border-radius: 30px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* ======================================================
+   PRODUCTOS
+   ====================================================== */
+.grid-productos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 25px;
+  padding: 40px 20px;
+}
+.card-producto {
+  background-color: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease;
+}
+.card-producto:hover {
+  transform: scale(1.02);
+}
+.card-producto img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+.info-producto {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.info-producto h3 {
+  font-size: 18px;
+}
+.descripcion {
+  font-size: 14px;
+  color: #666;
+}
+.precio {
+  font-size: 16px;
+  font-weight: bold;
+  color: #005f73;
+}
+form {
+  display: flex;
+  gap: 10px;
+}
+form input[type="number"] {
+  width: 60px;
+  padding: 5px;
+}
+form button {
+  background-color: #0a9396;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+form button:hover {
+  background-color: #007f7f;
+}
+
+/* ======================================================
+   CONTACTO
+   ====================================================== */
+.contacto {
+  padding: 40px 20px;
+  text-align: center;
+}
+
+/* ======================================================
+   FOOTER
+   ====================================================== */
+footer {
+  background-color: #e0e0e0;
+  text-align: center;
+  padding: 20px;
+  font-size: 14px;
+}
+
+/* ======================================================
+   CARRITO
+   ====================================================== */
+.carrito {
+  cursor: pointer;
+  font-size: 20px;
+  color: white;
+  position: relative;
+}
+.carrito.flash {
+  animation: flash 0.4s ease;
+}
+@keyframes flash {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.3); }
+  100% { transform: scale(1); }
+}
+#contador-carrito {
+  background-color: #94d2bd;
+  color: #005f73;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 14px;
+  margin-left: 5px;
+}
+
+/* ======================================================
+   PANEL FLOTANTE DEL CARRITO
+   ====================================================== */
+/* Agregar estos estilos al archivo CSS existente */
+
+.resumen-carrito {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    width: 320px;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(11, 58, 102, 0.2);
+    padding: 20px;
+    z-index: 999;
+    border: 2px solid #0B3A66;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    transform-origin: top right;
+}
+
+.resumen-carrito.oculto {
+    opacity: 0;
+    transform: scale(0.8);
+    pointer-events: none;
+}
+
+.resumen-carrito h3 {
+    margin: 0 0 15px 0;
+    color: #0B3A66;
+    font-size: 1.3rem;
+    border-bottom: 2px solid #1E6BC4;
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+#lista-carrito {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 15px 0;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+#lista-carrito li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 8px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    border-left: 3px solid #1E6BC4;
+    transition: all 0.2s ease;
+}
+
+#lista-carrito li:hover {
+    transform: translateX(5px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+#lista-carrito li button {
+    background: #ff4444;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    transition: all 0.2s ease;
+}
+
+#lista-carrito li button:hover {
+    background: #cc0000;
+    transform: scale(1.1);
+}
+
+#total-carrito {
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: #0B3A66;
+    text-align: center;
+    margin: 15px 0;
+    padding: 10px;
+    background: linear-gradient(135deg, #0B3A66, #1E6BC4);
+    color: white;
+    border-radius: 8px;
+}
+
+.resumen-carrito .boton {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(135deg, #0B3A66, #1E6BC4);
+    color: white;
+    text-align: center;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(11, 58, 102, 0.3);
+}
+
+.resumen-carrito .boton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(11, 58, 102, 0.4);
+}
+
+/* Scroll personalizado para la lista del carrito */
+#lista-carrito::-webkit-scrollbar {
+    width: 6px;
+}
+
+#lista-carrito::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+#lista-carrito::-webkit-scrollbar-thumb {
+    background: #1E6BC4;
+    border-radius: 10px;
+}
+
+#lista-carrito::-webkit-scrollbar-thumb:hover {
+    background: #0B3A66;
+}
+
+/* Animación de entrada del carrito */
+@keyframes slideInCart {
+    from {
+        opacity: 0;
+        transform: translateY(-10px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.resumen-carrito:not(.oculto) {
+    animation: slideInCart 0.3s ease-out;
+}
+
+/* ======================================================
+   ANIMACIÓN DE PRODUCTO AL CARRITO
+   ====================================================== */
+.fly-img {
+  position: absolute;
+  z-index: 999;
+  pointer-events: none;
+  transition: transform 0.8s ease-in-out, opacity 2s ease-in-out;
+  width: 80px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.card-producto:hover {
+  transform: translateY(-5px) scale(1.03);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+form button:active {
+  animation: pulse 0.3s ease;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+.categorias {
+  background: linear-gradient(135deg, #e0f7f4, #f9f9f9);
+}
+.contacto {
+  background: linear-gradient(135deg, #f9f9f9, #e0f7f4);
+}
+
+* {
+  transition: all 0.3s ease;
+}
+
+.modo-oscuro {
+  background-color: #1a1a1a;
+  color: #f0f0f0;
+}
+.modo-oscuro .navbar,
+.modo-oscuro footer {
+  background-color: #222;
+  color: #f0f0f0;
+}
+.modo-oscuro .card-producto {
+  background-color: #2a2a2a;
+  color: #f0f0f0;
+}
+.modo-oscuro .boton {
+  background-color: #333;
+  color: #94d2bd;
+}
+
+#loader {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 6px solid #ccc;
+  border-top-color: #005f73;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.toast {
+  position: center;
+  bottom: 30px;
+  right: 30px;
+  background-color: #005f73;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  opacity: 15;
+  transition: opacity 15s ease;
+  z-index: 1500;
+}
+.toast.visible {
+  opacity: 0;
+}
+
+.carousel {
+  overflow: hidden;
+  width: 100%;
+}
+.carousel-track {
+  display: flex;
+  animation: scroll 12s linear infinite;
+}
+@keyframes scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+    /* Estilos del Asistente Virtual */
+    .asistente-container {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 1000;
+    }
+
+    .asistente-boton {
+        width: 70px;
+        height: 70px;
+        background: linear-gradient(135deg, #0B3A66, #1E6BC4);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 4px 15px rgba(11, 58, 102, 0.3);
+        transition: all 0.3s ease;
+        border: 3px solid white;
+        animation: flotar 3s ease-in-out infinite;
+    }
+
+    .asistente-boton:hover {
+        transform: scale(1.1);
+        box-shadow: 0 6px 20px rgba(11, 58, 102, 0.4);
+    }
+
+    .asistente-boton i {
+        font-size: 30px;
+        color: white;
+    }
+
+    .chat-container {
+        position: absolute;
+        bottom: 90px;
+        right: 0;
+        width: 320px;
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        display: none;
+        flex-direction: column;
+        overflow: hidden;
+        border: 2px solid #0B3A66;
+    }
+
+    .chat-header {
+        background: linear-gradient(135deg, #0B3A66, #1E6BC4);
+        color: white;
+        padding: 15px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .chat-header img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+    }
+
+    .chat-messages {
+        height: 300px;
+        overflow-y: auto;
+        padding: 15px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        background: #f8f9fa;
+    }
+
+    .mensaje {
+        max-width: 80%;
+        padding: 12px 15px;
+        border-radius: 15px;
+        margin: 5px 0;
+        animation: aparecer 0.3s ease-out;
+    }
+
+    .mensaje-asistente {
+        align-self: flex-start;
+        background: white;
+        border: 1px solid #e0e0e0;
+        border-bottom-left-radius: 5px;
+        position: relative;
+    }
+
+    .mensaje-asistente::before {
+        content: '';
+        position: absolute;
+        bottom: -1px;
+        left: -8px;
+        width: 0;
+        height: 0;
+        border-right: 8px solid white;
+        border-top: 8px solid transparent;
+        border-bottom: 8px solid transparent;
+    }
+
+    .mensaje-usuario {
+        align-self: flex-end;
+        background: linear-gradient(135deg, #0B3A66, #1E6BC4);
+        color: white;
+        border-bottom-right-radius: 5px;
+    }
+
+    .opciones {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-top: 10px;
+    }
+
+    .opcion-btn {
+        padding: 10px 15px;
+        background: white;
+        border: 1px solid #eff2f5;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-align: left;
+        font-size: 14px;
+    }
+
+    .opcion-btn:hover {
+        background: #0B3A66;
+        color: white;
+        transform: translateX(5px);
+    }
+
+    .chat-input {
+        padding: 15px;
+        border-top: 1px solid #e0e0e0;
+        background: white;
+    }
+
+    .cerrar-chat {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        background: none;
+        border: none;
+        color: white;
+        font-size: 20px;
+        cursor: pointer;
+    }
+
+    @keyframes flotar {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+    }
+
+    @keyframes aparecer {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Indicador de nuevo mensaje */
+    .notificacion {
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        width: 20px;
+        height: 20px;
+        background: #ff4444;
+        border-radius: 50%;
+        color: white;
+        font-size: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        animation: palpitar 1.5s infinite;
+    }
+
+    @keyframes palpitar {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+    }
+
+    /* Efectos de voz */
+    .hablando {
+        animation: hablar 0.5s ease-in-out infinite;
+    }
+
+    @keyframes hablar {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+    }
+  .asistente-boton img {
+width: 40px;
+height: 40px;
+border-radius: 50%;
+object-fit: cover;
+}
+
+     /* Estilos del Asistente Virtual */
+    .asistente-container {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 1000;
+    }
+
+    .asistente-boton {
+        width: 70px;
+        height: 70px;
+        background: linear-gradient(135deg, #0B3A66, #1E6BC4);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 4px 15px rgba(11, 58, 102, 0.3);
+        transition: all 0.3s ease;
+        border: 3px solid white;
+        animation: flotar 3s ease-in-out infinite;
+    }
+
+    .asistente-boton:hover {
+        transform: scale(1.1);
+        box-shadow: 0 6px 20px rgba(11, 58, 102, 0.4);
+    }
+
+    .asistente-boton i {
+        font-size: 30px;
+        color: white;
+    }
+
+    .chat-container {
+        position: absolute;
+        bottom: 90px;
+        right: 0;
+        width: 320px;
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        display: none;
+        flex-direction: column;
+        overflow: hidden;
+        border: 2px solid #0B3A66;
+    }
+
+    .chat-header {
+        background: linear-gradient(135deg, #0B3A66, #1E6BC4);
+        color: white;
+        padding: 15px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .chat-header img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    .chat-messages {
+        height: 300px;
+        overflow-y: auto;
+        padding: 15px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        background: #f8f9fa;
+    }
+
+    .mensaje {
+        max-width: 80%;
+        padding: 12px 15px;
+        border-radius: 15px;
+        margin: 5px 0;
+        animation: aparecer 0.3s ease-out;
+    }
+
+    .mensaje-asistente {
+        align-self: flex-start;
+        background: white;
+        border: 1px solid #e0e0e0;
+        border-bottom-left-radius: 5px;
+        position: relative;
+    }
+
+    .mensaje-asistente::before {
+        content: '';
+        position: absolute;
+        bottom: -1px;
+        left: -8px;
+        width: 0;
+        height: 0;
+        border-right: 8px solid white;
+        border-top: 8px solid transparent;
+        border-bottom: 8px solid transparent;
+    }
+
+    .mensaje-usuario {
+        align-self: flex-end;
+        background: linear-gradient(135deg, #0B3A66, #1E6BC4);
+        color: white;
+        border-bottom-right-radius: 5px;
+    }
+
+    .opciones {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-top: 10px;
+    }
+
+    .opcion-btn {
+        padding: 10px 15px;
+        background: white;
+        border: 1px solid #0B3A66;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-align: left;
+        font-size: 14px;
+    }
+
+    .opcion-btn:hover {
+        background: #0B3A66;
+        color: white;
+        transform: translateX(5px);
+    }
+
+    .chat-input {
+        padding: 15px;
+        border-top: 1px solid #e0e0e0;
+        background: white;
+    }
+
+    .cerrar-chat {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        background: none;
+        border: none;
+        color: white;
+        font-size: 20px;
+        cursor: pointer;
+    }
+
+    @keyframes flotar {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+    }
+
+    @keyframes aparecer {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Indicador de nuevo mensaje */
+    .notificacion {
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        width: 20px;
+        height: 20px;
+        background: #ff4444;
+        border-radius: 50%;
+        color: white;
+        font-size: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        animation: palpitar 1.5s infinite;
+    }
+
+    @keyframes palpitar {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+    }
+
+    /* Efectos de voz */
+    .hablando {
+        animation: hablar 0.5s ease-in-out infinite;
+    }
+
+    @keyframes hablar {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+    }
+
+    /* Estilos mejorados para el resumen del carrito */
+    .resumen-carrito {
+        position: fixed;
+        top: 80px;
+        right: 20px;
+        width: 350px;
+        background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(11, 58, 102, 0.2);
+        padding: 20px;
+        z-index: 999;
+        border: 2px solid #0B3A66;
+        backdrop-filter: blur(10px);
+        transition: all 0.3s ease;
+        transform-origin: top right;
+    }
+
+    .resumen-carrito.oculto {
+        opacity: 0;
+        transform: scale(0.8);
+        pointer-events: none;
+    }
+
+    .resumen-carrito h3 {
+        margin: 0 0 15px 0;
+        color: #0B3A66;
+        font-size: 1.3rem;
+        border-bottom: 2px solid #1E6BC4;
+        padding-bottom: 10px;
+        text-align: center;
+    }
+
+    #lista-carrito {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 15px 0;
+        max-height: 250px;
+        overflow-y: auto;
+    }
+
+    #lista-carrito li {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        margin-bottom: 8px;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        border-left: 3px solid #1E6BC4;
+        transition: all 0.2s ease;
+        gap: 10px;
+    }
+
+    #lista-carrito li:hover {
+        transform: translateX(5px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .producto-imagen-mini {
+        width: 40px;
+        height: 40px;
+        border-radius: 5px;
+        object-fit: cover;
+        border: 1px solid #e0e0e0;
+    }
+
+    .producto-info-mini {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .producto-nombre-mini {
+        font-weight: bold;
+        color: #0B3A66;
+        font-size: 0.85rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .producto-detalles-mini {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 0.8rem;
+        color: #666;
+        margin-top: 2px;
+    }
+
+    #lista-carrito li button {
+        background: #ff4444;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 25px;
+        height: 25px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        transition: all 0.2s ease;
+        flex-shrink: 0;
+    }
+
+    #lista-carrito li button:hover {
+        background: #cc0000;
+        transform: scale(1.1);
+    }
+
+    #total-carrito {
+        font-weight: bold;
+        font-size: 1.2rem;
+        color: #0B3A66;
+        text-align: center;
+        margin: 15px 0;
+        padding: 10px;
+        background: linear-gradient(135deg, #0B3A66, #1E6BC4);
+        color: white;
+        border-radius: 8px;
+    }
+
+    .resumen-carrito .boton {
+        display: block;
+        width: 100%;
+        padding: 12px;
+        background: linear-gradient(135deg, #0B3A66, #1E6BC4);
+        color: white;
+        text-align: center;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 10px rgba(11, 58, 102, 0.3);
+    }
+
+    .resumen-carrito .boton:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 15px rgba(11, 58, 102, 0.4);
+    }
+
+    /* Scroll personalizado para la lista del carrito */
+    #lista-carrito::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    #lista-carrito::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 10px;
+    }
+
+    #lista-carrito::-webkit-scrollbar-thumb {
+        background: #1E6BC4;
+        border-radius: 10px;
+    }
+
+    #lista-carrito::-webkit-scrollbar-thumb:hover {
+        background: #0B3A66;
+    }
+
+    /* Animación de entrada del carrito */
+    @keyframes slideInCart {
+        from {
+            opacity: 0;
+            transform: translateY(-10px) scale(0.9);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+    }
+
+    .resumen-carrito:not(.oculto) {
+        animation: slideInCart 0.3s ease-out;
+    }
+
+    /* Efecto flash para el icono del carrito */
+    .flash {
+        animation: flash 0.4s ease;
+    }
+
+    @keyframes flash {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.2); }
+    }
+
+    /* Animación de imagen volando al carrito */
+    .fly-img {
+        position: fixed;
+        z-index: 1000;
+        transition: all 0.8s cubic-bezier(0.65, 0, 0.35, 1);
+        pointer-events: none;
+        border-radius: 5px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+  .panel-usuario {
+    display: flex;
+    align-items: center;
+    margin-left: 15px;
+}
+
+.panel-usuario a {
+    color: white;
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: background 0.3s;
+}
+
+.panel-usuario a:hover {
+    background: rgba(255, 255, 255, 0.1);
+}

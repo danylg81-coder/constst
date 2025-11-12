@@ -1,0 +1,15 @@
+/* styles/variables.css */
+
+
+:root {
+--primary: #1e3a8a;
+--primary-dark: #153e75;
+--secondary: #3b82f6;
+--background: #f8fafc;
+--light: #ffffff;
+--gray: #e2e8f0;
+--muted: #64748b;
+--success: #16a34a;
+--error: #dc2626;
+--radius: 8px;
+}

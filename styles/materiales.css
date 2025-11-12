@@ -1,0 +1,71 @@
+/* --- css/materiales.css --- */
+
+.pagina-header {
+    background: var(--color-primario);
+    color: var(--color-blanco);
+    padding: 3rem 0;
+    text-align: center;
+}
+
+.pagina-header h1 {
+    font-size: 2.5rem;
+}
+
+.banner-tienda {
+    background: var(--color-secundario);
+    color: var(--color-blanco);
+    text-align: center;
+    padding: 1.5rem 0;
+}
+.banner-tienda h3 {
+    font-size: 1.5rem;
+}
+
+.catalogo {
+    padding: 4rem 0;
+}
+
+.catalogo h2 {
+    text-align: center;
+    font-size: 2.2rem;
+    color: var(--color-primario);
+    margin-bottom: 3rem;
+}
+
+.categorias-grid {
+    display: grid;
+    /* Crea columnas automáticas de 300px min. */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.categoria-item {
+    background: var(--color-blanco);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    overflow: hidden; /* Para que la imagen respete el borde redondeado */
+    transition: transform 0.3s ease;
+}
+
+.categoria-item:hover {
+    transform: translateY(-5px);
+}
+
+.categoria-item img {
+    width: 100%;
+    height: 200px; /* Altura fija para la imagen */
+    object-fit: cover; /* Asegura que la imagen cubra el espacio */
+}
+
+.categoria-info {
+    padding: 1.5rem;
+}
+
+.categoria-info h3 {
+    color: var(--color-primario);
+}
+
+.categoria-info p {
+    font-size: 0.9rem;
+    color: #666;
+}

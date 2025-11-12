@@ -1,0 +1,417 @@
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header-pago {
+            background: linear-gradient(135deg, #0B3A66, #1E6BC4);
+            color: white;
+            padding: 30px 0;
+            margin-bottom: 30px;
+            border-radius: 0 0 20px 20px;
+            box-shadow: 0 4px 20px rgba(11, 58, 102, 0.3);
+        }
+
+        .header-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .volver-carrito {
+            color: white;
+            text-decoration: none;
+            background: rgba(255,255,255,0.2);
+            padding: 10px 20px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .volver-carrito:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateX(-5px);
+        }
+
+        .grid-pago {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .grid-pago {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .informacion-transferencia {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            padding: 25px;
+        }
+
+        .informacion-transferencia h2 {
+            color: #0B3A66;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #1E6BC4;
+        }
+
+        .datos-bancarios {
+            background: linear-gradient(135deg, #f8f9fa, #e3f2fd);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-left: 4px solid #1E6BC4;
+        }
+
+        .banco-item {
+            display: flex;
+            justify-content: between;
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .banco-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .banco-label {
+            font-weight: bold;
+            color: #0B3A66;
+            min-width: 150px;
+        }
+
+        .banco-valor {
+            color: #333;
+            flex: 1;
+        }
+
+        .instrucciones {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .instrucciones h3 {
+            color: #856404;
+            margin-bottom: 15px;
+        }
+
+        .instrucciones ol {
+            padding-left: 20px;
+            margin-bottom: 0;
+        }
+
+        .instrucciones li {
+            margin-bottom: 10px;
+            color: #856404;
+        }
+
+        .resumen-pedido {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            padding: 25px;
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+        }
+
+        .resumen-pedido h2 {
+            color: #0B3A66;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #1E6BC4;
+            text-align: center;
+        }
+
+        .lista-productos-pago {
+            margin-bottom: 20px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .producto-item-pago {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+            gap: 12px;
+        }
+
+        .producto-item-pago:last-child {
+            border-bottom: none;
+        }
+
+        .producto-imagen-pago {
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        .producto-info-pago {
+            flex: 1;
+        }
+
+        .producto-nombre-pago {
+            font-weight: bold;
+            color: #0B3A66;
+            font-size: 0.9rem;
+            margin-bottom: 4px;
+        }
+
+        .producto-detalles-pago {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .detalle-total {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .total-final {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #0B3A66;
+            border-bottom: none;
+            border-top: 2px solid #1E6BC4;
+            padding-top: 15px;
+        }
+
+        .form-confirmacion {
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        .checkbox-confirmacion {
+            margin-bottom: 20px;
+        }
+
+        .checkbox-confirmacion input {
+            margin-right: 10px;
+        }
+
+        .btn-confirmar {
+            width: 100%;
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+        }
+
+        .btn-confirmar:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+        }
+
+        .btn-confirmar:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .nota-importante {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 20px;
+            text-align: center;
+            color: #155724;
+        }
+
+        .qr-code {
+            text-align: center;
+            margin: 20px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            border: 2px solid #1E6BC4;
+            box-shadow: 0 4px 15px rgba(30, 107, 196, 0.1);
+        }
+
+        .qr-code img {
+            width: 200px;
+            height: 200px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 10px;
+            background: white;
+        }
+
+        .qr-placeholder {
+            width: 200px;
+            height: 200px;
+            background: #f8f9fa;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            color: #666;
+            font-style: italic;
+        }
+
+        .qr-info {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .qr-datos {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 15px;
+            font-size: 0.8rem;
+            text-align: left;
+        }
+
+        .qr-datos h4 {
+            color: #0B3A66;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .qr-datos-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .qr-datos-item:last-child {
+            border-bottom: none;
+        }
+
+        .qr-datos-label {
+            font-weight: bold;
+            color: #495057;
+        }
+
+        .qr-datos-valor {
+            color: #0B3A66;
+        }
+
+        .transfermovil-logo {
+            background: linear-gradient(135deg, #ffffff, #ffffff);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .qr-raw-data {
+            background: #f8f9fa;
+            border: 1px dashed #6c757d;
+            border-radius: 5px;
+            padding: 10px;
+            margin-top: 10px;
+            font-family: monospace;
+            font-size: 0.7rem;
+            word-break: break-all;
+            color: #495057;
+        }
+
+        .monto-destacado {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #856404;
+        }
+
+        .btn-abrir-app {
+            display: inline-block;
+            background: linear-gradient(135deg, #00a650, #008c3a);
+            color: white;
+            text-decoration: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin: 15px 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 166, 80, 0.3);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-abrir-app:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 166, 80, 0.4);
+        }
+
+        .opciones-pago {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .opcion-pago {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .opcion-pago:hover {
+            border-color: #00a650;
+            transform: translateY(-2px);
+        }
+
+        .opcion-pago h4 {
+            margin: 0 0 10px 0;
+            color: #0B3A66;
+        }
+
+        .error-message {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #f5c6cb;
+        }
+    

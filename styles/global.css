@@ -1,0 +1,122 @@
+/* --- css/global.css --- */
+
+/* Importar una fuente moderna desde Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+
+/* Variables de Color (Cámbialas a tu gusto) */
+:root {
+    --color-primario: #0a2f5c; /* Azul oscuro (confianza) */
+    --color-secundario: #f39c12; /* Naranja/Ocre (construcción) */
+    --color-texto: #333;
+    --color-fondo: #f9f9f9;
+    --color-blanco: #ffffff;
+}
+
+/* Reseteo básico y tipografía global */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
+    color: var(--color-texto);
+    background-color: var(--color-fondo);
+}
+
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* --- Cabecera y Navegación --- */
+header {
+    background: var(--color-blanco);
+    padding: 1rem 0;
+    border-bottom: 2px solid #eee;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header .logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-primario);
+    text-decoration: none;
+}
+/* header .logo img { height: 50px; } */ /* Descomenta si usas un logo en imagen */
+
+nav ul {
+    list-style: none;
+    display: flex;
+}
+
+nav li {
+    margin-left: 1.5rem;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--color-primario);
+    font-weight: 700;
+    transition: color 0.3s ease;
+}
+
+nav a:hover,
+nav a.activo {
+    color: var(--color-secundario);
+}
+
+/* --- Botones (Llamada a la Acción - CTA) --- */
+.btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.btn-primario {
+    background: var(--color-secundario);
+    color: var(--color-blanco);
+}
+.btn-primario:hover {
+    background: #e67e22; /* Un naranja más oscuro */
+}
+
+.btn-secundario {
+    background: var(--color-primario);
+    color: var(--color-blanco);
+}
+.btn-secundario:hover {
+    background: #082649;
+}
+
+/* --- Pie de Página --- */
+footer {
+    background: var(--color-primario);
+    color: var(--color-blanco);
+    text-align: center;
+    padding: 2rem 0;
+    margin-top: 3rem;
+}
+
+footer p {
+    margin: 0.5rem 0;
+}
+footer a {
+    color: var(--color-secundario);
+    text-decoration: none;
+}
